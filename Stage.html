@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stage Fear Removal Platform</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #f2f6ff;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 500px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 40px 32px 32px 32px;
+      box-shadow: 0 6px 32px #d9e1ec6c;
+      border-radius: 14px;
+      transition: box-shadow .18s;
+    }
+    .hero-text {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .hero-text h1 {
+      font-size: 2em;
+      color: #2156c1;
+      margin-bottom: 0.3em;
+    }
+    .hero-text p {
+      color: #666;
+    }
+    .form-box {
+      margin: 0 auto 8px;
+      max-width: 340px;
+      padding: 28px 18px;
+      border: 1.5px solid #e2e8f4;
+      border-radius: 10px;
+      background: #f6f9ff;
+      box-shadow: 0 2px 4px #e0eaff20;
+    }
+    .form-box label, .form-box input {
+      display: block;
+      width: 100%;
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+    .form-box input[type="text"],
+    .form-box input[type="password"] {
+      padding: 10px;
+      border-radius: 7px;
+      border: 1.5px solid #aac6ea;
+      margin-bottom: 20px;
+      font-size: 1em;
+      background:#f3f9ff;
+    }
+    .form-box button {
+      width: 47%;
+      padding: 11px;
+      margin-right: 3%;
+      font-size: 1.05em;
+      border: none;
+      background: #2c76e6;
+      color: white;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight:600;
+      letter-spacing:.5px;
+      margin-bottom: 3px;
+      transition:.2s background;
+    }
+    .form-box button:last-child {
+      margin-right: 0;
+      background: #2edaa0;
+    }
+    .form-box button:hover { filter: brightness(0.95);}
+    .note {
+      margin-top: 18px;
+      text-align: center;
+      color: #7a7a7a;
+      font-size:0.97em;
+      font-style: italic;
+      letter-spacing:.05em;
+    }
+    #homePage h2 {
+      color: #2156c1;
+      margin-bottom:8px;
+    }
+    #homePage .levels {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin: 28px 0 14px 0;
+    }
+    .level-card {
+      padding: 20px 18px;
+      border-radius: 10px;
+      background: #ebf3fc;
+      border: 1px solid #d0dfef;
+      cursor: pointer;
+      box-shadow: 0 1px 4px #e1eafe28;
+      display: flex;
+      flex-direction:column;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .level-card:hover {
+      background: #dadefa;
+      box-shadow: 0 4px 20px #bad7fa68;
+    }
+    .level-card .title {font-weight:700; color:#16356e;}
+    .level-card .desc {color:#37496e; margin-top:6px;}
+    #uploadPage .level-title {
+      color: #2156c1;
+      font-weight:600;
+      font-size: 1.15em;
+      margin-bottom:6px;
+    }
+    #uploadPage .level-desc {
+      margin: 6px 0 18px 0;
+      color: #37496e;
+      font-size: 1em;
+    }
+    .upld-form {
+      padding: 20px 16px 8px 16px;
+      max-width: 350px;
+      margin: 0 auto;
+      background: #f7fbfe;
+      border: 1px solid #d8e8fd;
+      border-radius: 9px;
+      box-shadow: 0 1px 8px #bad7fa18;
+      margin-bottom: 12px;
+    }
+    .upld-form label {
+      display:block;
+      margin-bottom:7px;
+      font-weight:500;
+    }
+    .upld-form input[type="file"] {
+      width:100%;
+      padding: 8px;
+      margin-bottom:18px;
+      border: 1px solid #aac6ea;
+      border-radius: 6px;
+      background: #f9fafd;
+    }
+    .upld-form button {
+      display:block;
+      width: 100%;
+      padding:12px;
+      margin-top:2px;
+      background: #2c76e6;
+      color:white;
+      font-size:1em;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      font-weight:600;
+      letter-spacing:.5px;
+      margin-bottom:7px;
+      transition:.22s background;
+    }
+    .upld-form button:hover {
+      background: #16356e;
+    }
+    .upld-preview {
+      margin: 7px 0 0 0;
+      color: #1e942e;
+      font-size:0.97em;
+      min-height:18px;
+    }
+    .back-btn {
+      background: #e7eaf0;
+      color: #2c76e6;
+      border: none;
+      padding: 8px 16px;
+      font-size:1em;
+      border-radius:6px;
+      cursor:pointer;
+      margin-bottom:18px;
+    }
+    .back-btn:hover {background: #bad7fa; }
+    .msg {
+      color: #e03131;
+      text-align: center;
+      font-size:1.06em;
+      margin-bottom: 8px;
+      min-height: 22px;
+    }
+    #resultPage h2 {
+      color: #1e942e;
+      margin-bottom:12px;
+      text-align:center;
+      font-size:1.45em;
+    }
+    #resultPage p {
+      text-align:center;
+      font-size:1.14em;
+    }
+    #resultPage .back-btn {
+      margin:28px auto 0;
+      display:block;
+      background: #dceeff;
+      color: #2156c1 !important;
+    }
+    @media (max-width: 600px) {
+      .container {max-width:95vw;}
+      .form-box, .upld-form {padding:14px 4vw;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Landing Page -->
+  <div id="landingPage" class="container">
+    <div class="hero-text">
+      <h1>Welcome To Our Stage Fear Removal Platform</h1>
+      <p>Let's start your journey of excellent communication with us</p>
+    </div>
+    <div class="form-box">
+      <div id="formMsg" class="msg"></div>
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Enter your username">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password">
+      <button onclick="loginHandler()">Login</button>
+      <button onclick="registerHandler()">Register</button>
+    </div>
+    <!-- TED-Ed Stage Fright Video -->
+    <div style="display:flex; justify-content:center; margin-bottom:16px;">
+      <iframe width="310" height="175" src="https://www.youtube.com/embed/K93fMnFKwfI"
+        title="The science of stage fright (and how to overcome it)" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+  <!-- Home Page -->
+  <div id="homePage" class="container" style="display:none;">
+    <h2>Hello, <span id="displayName"></span>!</h2>
+    <p>Let's start your journey</p>
+    <div class="levels">
+      <div class="level-card" onclick="openLevel('Easy')">
+        <span class="title">Easy (Level 1)</span>
+        <span class="desc">Includes speeches</span>
+      </div>
+      <div class="level-card" onclick="openLevel('Medium')">
+        <span class="title">Medium (Level 2)</span>
+        <span class="desc">Includes Group Discussions and Mock Meetings</span>
+      </div>
+      <div class="level-card" onclick="openLevel('Hard')">
+        <span class="title">Hard (Level 3)</span>
+        <span class="desc">Feel yourself as hosting some functions at stage</span>
+      </div>
+    </div>
+  </div>
+  <!-- Upload Page -->
+  <div id="uploadPage" class="container" style="display:none;">
+    <button class="back-btn" onclick="showHome()">← Back</button>
+    <div class="level-title" id="uploadLevelTitle"></div>
+    <div class="level-desc" id="uploadLevelDesc"></div>
+    <form class="upld-form" onsubmit="return submitUploadForm(event)">
+      <label for="uploadVideo">Upload your Stage Video (mp4, webm):</label>
+      <input type="file" id="uploadVideo" accept="video/*" required>
+      <label for="uploadAudio">Upload your Audio (mp3, wav):</label>
+      <input type="file" id="uploadAudio" accept="audio/*" required>
+      <button type="submit">Submit</button>
+      <div class="upld-preview" id="uploadStatus"></div>
+    </form>
+  </div>
+  <!-- Result/Success Page -->
+  <div id="resultPage" class="container" style="display:none;">
+    <h2>🎉 Upload Successful!</h2>
+    <p>Thank you for submitting your Stage performance.<br>
+    Your video and audio have been received.<br>
+    <br>
+    <strong>Keep practicing and check your results on the platform!</strong>
+    </p>
+    <button class="back-btn" onclick="goHomeFromResult()">Go to Home</button>
+  </div>
+  <script>
+    // In-memory user storage (use localStorage or backend for real apps)
+    const users = {};
+    function showMsg(msg) {
+      document.getElementById('formMsg').innerText = msg;
+    }
+    function loginHandler() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      if(!username || !password) {
+        showMsg("Please enter both username and password.");
+        return;
+      }
+      if (!users[username]) {
+        showMsg("User not found. Please register first.");
+        return;
+      }
+      if(users[username] !== password) {
+        showMsg("Incorrect password. Please try again or register.");
+        return;
+      }
+      showMsg(""); // Clear message
+      document.getElementById('landingPage').style.display = 'none';
+      document.getElementById('homePage').style.display = 'block';
+      document.getElementById('uploadPage').style.display = 'none';
+      document.getElementById('resultPage').style.display = 'none';
+      document.getElementById('displayName').innerText = username;
+      document.getElementById('username').value = '';
+      document.getElementById('password').value = '';
+    }
+    function registerHandler() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      if(!username || !password) {
+        showMsg("Please enter both username and password for register.");
+        return;
+      }
+      if (users[username]) {
+        showMsg("User already exists! Please login instead.");
+        return;
+      }
+      users[username] = password;
+      showMsg("Registration successful. Please login with your credentials.");
+      document.getElementById('password').value = '';
+    }
+    function openLevel(level) {
+      let title = '';
+      let desc = '';
+      if(level === 'Easy') {
+        title = 'Easy (Level 1)';
+        desc = 'This level includes speeches to help you overcome stage fear step by step.';
+      } else if(level === 'Medium') {
+        title = 'Medium (Level 2)';
+        desc = 'This level includes group discussions and mock meetings for interactive communication practice.';
+      } else if(level === 'Hard') {
+        title = 'Hard (Level 3)';
+        desc = 'At this level, you can experience hosting some functions on stage, simulating real scenarios.';
+      }
+      document.getElementById('homePage').style.display = 'none';
+      document.getElementById('landingPage').style.display = 'none';
+      document.getElementById('uploadPage').style.display = 'block';
+      document.getElementById('resultPage').style.display = 'none';
+      document.getElementById('uploadLevelTitle').innerText = title;
+      document.getElementById('uploadLevelDesc').innerText = desc;
+      document.getElementById('uploadStatus').innerText = '';
+      document.getElementById('uploadVideo').value = '';
+      document.getElementById('uploadAudio').value = '';
+    }
+    function showHome() {
+      document.getElementById('uploadPage').style.display = 'none';
+      document.getElementById('homePage').style.display = 'block';
+      document.getElementById('resultPage').style.display = 'none';
+    }
+    function submitUploadForm(event) {
+      event.preventDefault();
+      const video = document.getElementById('uploadVideo').files[0];
+      const audio = document.getElementById('uploadAudio').files[0];
+      if (!video || !audio) {
+        document.getElementById('uploadStatus').innerText = 'Please upload both files!';
+        document.getElementById('uploadStatus').style.color = '#e03131';
+        return false;
+      }
+      document.getElementById('uploadPage').style.display = 'none';
+      document.getElementById('resultPage').style.display = 'block';
+      return false;
+    }
+    function goHomeFromResult() {
+      document.getElementById('resultPage').style.display = 'none';
+      document.getElementById('homePage').style.display = 'block';
+    }
+  </script>
+</body>
+</html>
